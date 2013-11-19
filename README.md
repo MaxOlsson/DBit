@@ -5,7 +5,7 @@ A lightweight micro-ORM with performance and ease-of-use in mind
 
 
 Execute Querys
-===
+==
 dynamic contact = dbit.Query("SELECT TOP 1 * FROM CONTACT").Populate();
 IEnumerable<dynamic> contacts = dbit.Query("SELECT * FROM CONTACT").PopulateModels();
 
@@ -13,7 +13,7 @@ Contact contact = dbit.Query("SELECT TOP 1 * FROM CONTACT").Populate<Contact>();
 IEnumerable<Contact> contacts = dbit.Query("SELECT TOP 1 * FROM CONTACT").PopulateModels<Contact>();
 
 Execute Stored Procedures
-===
+==
 dynamic contact = dbit.StoredProcedure("usp_GetContacts").Populate();
 IEnumerable<dynamic> contacts = dbit.StoredProcedure("usp_GetContacts").PopulateModels();
 
