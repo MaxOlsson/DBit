@@ -34,8 +34,6 @@ namespace DBitNET.DBit
             this.Connection = Connection;
         }
 
-        private Dictionary<string, object> _cache = new Dictionary<string, object>();
-        
         public SqlCommand Command { get; set; }
         public SqlConnection Connection { get; set; }
 
