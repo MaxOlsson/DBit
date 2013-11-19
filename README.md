@@ -5,7 +5,7 @@ A lightweight micro-ORM with performance and ease-of-use in mind
 
 
 Execute Querys
-===
+-------------------------
 ```C#
 //returns a dynamic object
 dynamic contact = dbit.Query("SELECT TOP 1 * FROM CONTACT").Populate();
@@ -21,7 +21,7 @@ IEnumerable<Contact> contacts = dbit.Query("SELECT TOP 1 * FROM CONTACT").Popula
 ```
 
 Execute Stored Procedures
-==
+-------------------------
 ```C#
 //returns a dynamic object
 dynamic contact = dbit.StoredProcedure("usp_GetContacts").Populate();
@@ -37,7 +37,7 @@ IEnumerable<Contact> contacts = dbit.StoredProcedure("usp_GetContacts").Populate
 ```
 
 Add parameters to Querys or Stored Procedures
-===
+-------------------------
 ```C#
 //Returns an object of type T
 var contact = dbit.Query("SELECT * FROM CONTACT WHERE ID = @ID AND NAME = @NAME")
@@ -46,7 +46,7 @@ var contact = dbit.Query("SELECT * FROM CONTACT WHERE ID = @ID AND NAME = @NAME"
                     .Populate<Contact>();
 ```
 Return the int-result
-===
+-------------------------
 ```C#
 var result = dbit.Query("SELECT * FROM CONTACT WHERE ID = @ID AND NAME = @NAME")
                     .AddParameter("@ID", 8128)
@@ -54,7 +54,7 @@ var result = dbit.Query("SELECT * FROM CONTACT WHERE ID = @ID AND NAME = @NAME")
                     .Execute();
 ```
 Get the returned dataset
-===
+-------------------------
 ```C#
 DataSet ds = dbit.Query("SELECT * FROM CONTACT WHERE ID = @ID AND NAME = @NAME")
                     .AddParameter("@ID", 8128)
