@@ -259,12 +259,13 @@ namespace DBitNET.DBit
                 {
                     this.Command.Connection.Open();
                 }
-
+                
                 SqlDataAdapter da = new SqlDataAdapter(this.Command);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
-                    
+
                 return Populate(ds.Tables[0].Rows[0]);
+
             }
             catch (Exception)
             {
@@ -394,9 +395,12 @@ namespace DBitNET.DBit
         // Interprets a member-access as an indexer-access on the contained DataRow.
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            var retVal = _row.Table.Columns.Contains(binder.Name);
-            result = retVal ? _row[binder.Name] : null;
-            return retVal;
+            //var retVal = (_row.Table.Columns[binder.Name] != null);
+            //result = retVal ? _row[binder.Name] : null;
+            //return retVal;
+
+            result = _row[binder.Name] ?? null;
+            return (result != null);
         }
     }
 }
