@@ -84,10 +84,10 @@ Connecting to a local SQL 2012 Server and doing lookups against a [Contact] tabl
     <td>Contact c3 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate<Contact>();</td><td>39 ms</td>
   </tr>
   <tr>
-    <td>IEnumerable<dynamic> c4 = dbit.Query("select top 100 * from contact").PopulateModels();</td><td>33 ms</td>
+    <td>IEnumerable<dynamic> c4 = dbit.Query("SELECT TOP 100 * FROM [CONTACT]").PopulateModels();</td><td>33 ms</td>
   </tr>
   <tr>
-    <td>IEnumerable<Contact> c5 = dbit.Query("select top 100 * from contact").PopulateModels<Contact>();</td><td>38 ms</td>
+    <td>IEnumerable<Contact> c5 = dbit.Query("SELECT TOP 100 * FROM [CONTACT]").PopulateModels<Contact>();</td><td>38 ms</td>
   </tr>
 </table>
 
