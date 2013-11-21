@@ -100,11 +100,11 @@ The exact code I ran to test this was with
     sw.Start();
     
     /*  dbit   */
-    //dynamic c1 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate(); //best: 33 ms ID: 15318
-    //dynamic c2 = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID = @ID").AddParameter("@ID", 15318).Populate(); //best: 36ms
-    //Contact c3 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate<Contact>(); //best: 39ms
-    //IEnumerable<dynamic> c4 = dbit.Query("select top 100 * from contact").PopulateModels(); //best 33ms
-    //IEnumerable<Contact> c5 = dbit.Query("select top 100 * from contact").PopulateModels<Contact>(); //best 38ms
+    //dynamic c1 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate();
+    //dynamic c2 = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID = @ID").AddParameter("@ID", 15318).Populate();
+    //Contact c3 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate<Contact>();
+    //IEnumerable<dynamic> c4 = dbit.Query("select top 100 * from contact").PopulateModels();
+    //IEnumerable<Contact> c5 = dbit.Query("select top 100 * from contact").PopulateModels<Contact>();
 
     sw.Stop();
     Console.WriteLine("Executed in: {0} (minutes, seconds, millisecs)\nPress any key to continue", sw.Elapsed.ToString("mm\\:ss\\.fff"));
