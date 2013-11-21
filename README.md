@@ -107,6 +107,6 @@ The exact code I ran to test this was with
     //IEnumerable<Contact> c5 = dbit.Query("select top 100 * from contact").PopulateModels<Contact>();
 
     sw.Stop();
-    Console.WriteLine("Executed in: {0} (minutes, seconds, millisecs)\nPress any key to continue", sw.Elapsed.ToString("mm\\:ss\\.fff"));
+    Console.WriteLine("Executed in: {0} (minutes, seconds, millisecs)", sw.Elapsed.ToString("mm\\:ss\\.fff"));
 
 ```
