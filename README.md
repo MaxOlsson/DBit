@@ -73,10 +73,12 @@ Connecting to a local SQL 2012 Server and doing lookups against a [Contact] tabl
     <th>Code</th><th>Fasted Recorded Time</th>
   </tr>
   <tr>
-    <td>```C#dynamic c1 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate();```</td><td>33 ms</td>
+    <td>dynamic c1 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate();</td><td>33 ms</td>
   </tr>
   <tr>
-    <td>dynamic c2 = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID = @ID").AddParameter("@ID", 15318).Populate();</td><td>36 ms</td>
+    <td>dynamic c2 = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID = @ID")
+                         .AddParameter("@ID", 15318)
+                         .Populate();</td><td>36 ms</td>
   </tr>
   <tr>
     <td>Contact c3 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate<Contact>();</td><td>39 ms</td>
