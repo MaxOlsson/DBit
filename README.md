@@ -71,7 +71,6 @@ Connecting to a local SQL 2012 Server and doing lookups against a [Contact] tabl
 | Code         |  Duration |
 |------------- |---------- |
 |`dynamic c1 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate();`| 33ms |
-|`dynamic c2 = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID = @ID").AddParameter("@ID", 15318).Populate();` | 36 ms|
 |`Contact c3 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate<Contact>();`| 39ms |
 |`IEnumerable<dynamic> c4 = dbit.Query("SELECT TOP 100 * FROM [CONTACT]").PopulateModels();`| 33ms |
 |`IEnumerable <Contact> c5 = dbit.Query("SELECT TOP 100 * FROM [CONTACT]").PopulateModels<Contact>();`| 38ms |
