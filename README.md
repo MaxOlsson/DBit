@@ -68,30 +68,13 @@ Performance tests
 All tests were performed on a Windows 7 64-bit machine, with Intel i5 2.67GHz and 8GB RAM. 
 Connecting to a local SQL 2012 Server and doing lookups against a [Contact] table which has 37 columns, and contains 380207 records.
 
-<table>
-  <tr>
-    <th>Code</th><th>Fasted Recorded Time</th>
-  </tr>
-  <tr>
-    <td>dynamic c1 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate();</td><td>33 ms</td>
-  </tr>
-  <tr>
-    <td>dynamic c2 = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID = @ID")
-                         .AddParameter("@ID", 15318)
-                         .Populate();</td><td>36 ms</td>
-  </tr>
-  <tr>
-    <td>Contact c3 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate<Contact>();</td><td>39 ms</td>
-  </tr>
-  <tr>
-    <td>IEnumerable<dynamic> c4 = 
-          dbit.Query("SELECT TOP 100 * FROM [CONTACT]").PopulateModels();</td><td>33 ms</td>
-  </tr>
-  <tr>
-    <td>IEnumerable<Contact> c5 = 
-            dbit.Query("SELECT TOP 100 * FROM [CONTACT]").PopulateModels<Contact>();</td><td>38 ms</td>
-  </tr>
-</table>
+| Code         |  Duration |
+|------------- |---------- |
+|`dynamic c1 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate();`| 33ms |
+|`dynamic c2 = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID = @ID").AddParameter("@ID", 15318).Populate();` | 36 ms|
+|`Contact c3 = dbit.Query("SELECT TOP 1 * FROM [CONTACT]").Populate<Contact>();`| 39ms |
+|`IEnumerable<dynamic> c4 = dbit.Query("SELECT TOP 100 * FROM [CONTACT]").PopulateModels();`| 33ms |
+|`IEnumerable <Contact> c5 = dbit.Query("SELECT TOP 100 * FROM [CONTACT]").PopulateModels<Contact>();`| 38ms |
 
 The exact code I ran to test this was with
 ```C#
