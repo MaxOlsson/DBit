@@ -71,9 +71,9 @@ Connecting to a local SQL 2012 Server and doing lookups against a [Contact] tabl
 | Code         |  Duration |
 |------------- |---------- |
 |`.Populate();`| 33ms |
-|`.Populate<Contact>();`| 39ms |
+|`.Populate<T>();`| 39ms |
 |`.PopulateModels();`| 33ms |
-|`.PopulateModels<Contact>();`| 38ms |
+|`.PopulateModels<T>();`| 38ms |
 
 The exact code I ran to test this was with
 ```C#
