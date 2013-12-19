@@ -466,8 +466,6 @@ namespace DBitNET.DBit
                     this.Command.Connection.Open();
                 }
 
-                Console.WriteLine(this.Command.CommandText);
-
                 SqlDataAdapter da = new SqlDataAdapter(this.Command);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
