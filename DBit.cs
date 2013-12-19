@@ -15,12 +15,14 @@
  */
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -176,6 +178,236 @@ namespace DBitNET.DBit
 
             return this;
         }
+        public DBit AddParameter(string paramName, string[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for(int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+            
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Object,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, Guid[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Guid,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, short[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Int16,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, int[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Int32,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, long[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Int64,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, bool[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Boolean,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, DateTime[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.DateTime,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, double[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Double,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, decimal[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Decimal,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
+        public DBit AddParameter(string paramName, byte[] args)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                builder.Append(paramName + i);
+                if (i < (len - 1)) { builder.Append(","); }
+            }
+
+            this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
+
+            for (int i = 0, len = args.Length; i < len; i++)
+            {
+                SqlParameter param = new SqlParameter(paramName + i, args[i])
+                {
+                    DbType = DbType.Byte,
+                    Direction = ParameterDirection.InputOutput
+                };
+                this.Command.Parameters.Add(param);
+            }
+
+            return this;
+        }
 
         public int Execute()
         {
@@ -234,6 +466,8 @@ namespace DBitNET.DBit
                     this.Command.Connection.Open();
                 }
 
+                Console.WriteLine(this.Command.CommandText);
+
                 SqlDataAdapter da = new SqlDataAdapter(this.Command);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -259,13 +493,12 @@ namespace DBitNET.DBit
                 {
                     this.Command.Connection.Open();
                 }
-                
+
                 SqlDataAdapter da = new SqlDataAdapter(this.Command);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
 
                 return Populate(ds.Tables[0].Rows[0]);
-
             }
             catch (Exception)
             {
@@ -277,7 +510,7 @@ namespace DBitNET.DBit
             }
         }
         public IEnumerable<T> PopulateModels<T>()
-        {
+        { 
             try
             {
                 if (this.Command.Connection.State != ConnectionState.Open)
@@ -333,25 +566,35 @@ namespace DBitNET.DBit
         }
         public static T Populate<T>(DataRow row)
         {
-            T instance = (T)Activator.CreateInstance(typeof(T));
+            Type type = typeof(T);
 
-            PropertyInfo[] pinfo = instance.GetType().GetProperties();
-
-            for (int i = 0; i < pinfo.Count(); i++)
+            if (type.IsPrimitive || type.Name == "String")
             {
-                PropertyInfo Property = pinfo[i];
-                for (int j = 0; j < row.Table.Columns.Count; j++)
-                {
-                    DataColumn Column = row.Table.Columns[j];
-                    if (Property.Name.ToLower() == Column.ColumnName.ToLower() && Property.PropertyType.Equals(Column.DataType))
-                    {
-                        object value = (row[Column.ColumnName].Equals(DBNull.Value) ? null : row[Column.ColumnName]);
-                        instance.GetType().GetProperty(Property.Name).SetValue(instance, value);
-                    }
-                }
-
+                return (T)row[0];
             }
-            return instance;
+            else
+            {
+                T instance = (T)Activator.CreateInstance(type);
+
+                PropertyInfo[] pinfo = instance.GetType().GetProperties();
+
+                for (int i = 0; i < pinfo.Count(); i++)
+                {
+                    PropertyInfo Property = pinfo[i];
+                    for (int j = 0; j < row.Table.Columns.Count; j++)
+                    {
+                        DataColumn Column = row.Table.Columns[j];
+
+                        if (Property.Name.Equals(Column.ColumnName, StringComparison.OrdinalIgnoreCase) && Property.PropertyType.Equals(Column.DataType))
+                        {
+                            object value = row[Column.ColumnName].Equals(DBNull.Value) ? null : row[Column.ColumnName];
+                            instance.GetType().GetProperty(Property.Name).SetValue(instance, value);
+                        }
+                    }
+
+                }
+                return instance;
+            }
         }
         public static IEnumerable<T> PopulateModels<T>(DataTable table)
         {
@@ -395,10 +638,6 @@ namespace DBitNET.DBit
         // Interprets a member-access as an indexer-access on the contained DataRow.
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            //var retVal = (_row.Table.Columns[binder.Name] != null);
-            //result = retVal ? _row[binder.Name] : null;
-            //return retVal;
-
             result = _row[binder.Name] ?? null;
             return (result != null);
         }
