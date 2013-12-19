@@ -44,6 +44,11 @@ var contact = dbit.Query("SELECT * FROM CONTACT WHERE ID = @ID AND NAME = @NAME"
                     .AddParameter("@ID", 8128)
                     .AddParameter("@NAME", "dbit")
                     .Populate<Contact>();
+                    
+//Supports arrays
+var contact = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID IN ( @IDS )")
+                      .AddParameter("@IDS", new int[] { 8228, 500, 404})
+                      .Populate<Contact>();
 ```
 Return the int-result
 -------------------------
@@ -68,10 +73,10 @@ Performance tests
 All tests were performed on a Windows 7 64-bit machine, with Intel i5 2.67GHz and 8GB RAM. 
 Connecting to a local SQL 2012 Server and doing lookups against a [Contact] table which has 37 columns, and contains 380207 records.
 
-| Code         |  Duration |
+| Code         |  Duration (Best) |
 |------------- |---------- |
 |`.Populate();`| 33ms |
-|`.Populate<T>();`| 39ms |
+|`.Populate<T>();`| 35ms |
 |`.PopulateModels();`| 33ms |
 |`.PopulateModels<T>();`| 38ms |
 
@@ -94,3 +99,19 @@ The exact code I ran to test this was with
     Console.WriteLine("Executed in: {0} (minutes, seconds, millisecs)", sw.Elapsed.ToString("mm\\:ss\\.fff"));
 
 ```
+Licence
+-------------------------
+
+Copyright 2013, Max Olsson
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
