@@ -46,7 +46,7 @@ var contact = dbit.Query("SELECT * FROM CONTACT WHERE ID = @ID AND NAME = @NAME"
                     .Populate<Contact>();
                     
 //Supports arrays
-var contact = dbit.Query("SELECT TOP 1 * FROM [CONTACT] WHERE ID IN ( @IDS )")
+var contact = dbit.Query("SELECT TOP 1 * FROM CONTACT WHERE ID IN ( @IDS )")
                       .AddParameter("@IDS", new int[] { 8228, 500, 404})
                       .Populate<Contact>();
 ```
@@ -99,7 +99,7 @@ The exact code I ran to test this was with
     Console.WriteLine("Executed in: {0} (minutes, seconds, millisecs)", sw.Elapsed.ToString("mm\\:ss\\.fff"));
 
 ```
-Licence
+License
 -------------------------
 
 Copyright 2013, Max Olsson
