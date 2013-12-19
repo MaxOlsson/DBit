@@ -68,111 +68,111 @@ namespace DBitNET.DBit
             return this;
         }
 
-        public DBit AddParameter(string paramName, string value)
+        public DBit AddParameter(string paramName, string value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.String,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, Guid value)
+        public DBit AddParameter(string paramName, Guid value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.Guid,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, short value)
+        public DBit AddParameter(string paramName, short value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.Int16,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, int value)
+        public DBit AddParameter(string paramName, int value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.Int32,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, long value)
+        public DBit AddParameter(string paramName, long value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.Int64,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, bool value)
+        public DBit AddParameter(string paramName, bool value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.Boolean,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, DateTime value)
+        public DBit AddParameter(string paramName, DateTime value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.DateTime,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, double value)
+        public DBit AddParameter(string paramName, double value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.Double,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, decimal value)
+        public DBit AddParameter(string paramName, decimal value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.Decimal,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
             return this;
         }
-        public DBit AddParameter(string paramName, byte value)
+        public DBit AddParameter(string paramName, byte value, ParameterDirection paramDirection = ParameterDirection.Input)
         {
             SqlParameter param = new SqlParameter(paramName, value)
             {
                 DbType = DbType.Byte,
-                Direction = ParameterDirection.InputOutput
+                Direction = paramDirection
             };
             this.Command.Parameters.Add(param);
 
@@ -560,6 +560,8 @@ namespace DBitNET.DBit
 
         public static dynamic Populate(DataRow row)
         {
+            if (row[0].GetType().IsPrimitive || row[0].GetType().Name == "String") { return row[0]; }
+
             return new DBObject(row);
         }
         public static T Populate<T>(DataRow row)
