@@ -18,6 +18,9 @@ Contact contact = dbit.Query("SELECT TOP 1 * FROM CONTACT").Populate<Contact>();
 
 //returns a IEnumerable<T>
 IEnumerable<Contact> contacts = dbit.Query("SELECT TOP 1 * FROM CONTACT").PopulateModels<Contact>();
+
+//get a specific value (datatype) from the table
+int contactID = dbit.Query("SELECT TOP 1 ID * FROM CONTACT").Populate();
 ```
 
 Execute Stored Procedures
