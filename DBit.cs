@@ -564,6 +564,11 @@ namespace DBitNET.DBit
         public static T Populate<T>(DataRow row)
         {
             T instance = (T)Activator.CreateInstance(typeof(T));
+            
+            if (typeof(T).IsPrimitive || typeof(T).Name == "String") 
+            { 
+                return (T)row[0]; 
+            }
 
             PropertyInfo[] pinfo = instance.GetType().GetProperties();
 
