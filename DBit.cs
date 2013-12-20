@@ -178,12 +178,12 @@ namespace DBitNET.DBit
         public DBit AddParameter(string paramName, string[] args)
         {
             StringBuilder builder = new StringBuilder();
-            for(int i = 0, len = args.Length; i < len; i++)
+            for (int i = 0, len = args.Length; i < len; i++)
             {
                 builder.Append(paramName + i);
                 if (i < (len - 1)) { builder.Append(","); }
             }
-            
+
             this.Command.CommandText = this.Command.CommandText.Replace(paramName, builder.ToString());
 
             for (int i = 0, len = args.Length; i < len; i++)
@@ -505,7 +505,7 @@ namespace DBitNET.DBit
             }
         }
         public IEnumerable<T> PopulateModels<T>()
-        { 
+        {
             try
             {
                 if (this.Command.Connection.State != ConnectionState.Open)
@@ -563,49 +563,43 @@ namespace DBitNET.DBit
         }
         public static T Populate<T>(DataRow row)
         {
-            Type type = typeof(T);
+            T instance = (T)Activator.CreateInstance(typeof(T));
 
-            if (type.IsPrimitive || type.Name == "String")
+            PropertyInfo[] pinfo = instance.GetType().GetProperties();
+
+            for (int i = 0; i < pinfo.Count(); i++)
             {
-                return (T)row[0];
-            }
-            else
-            {
-                T instance = (T)Activator.CreateInstance(type);
-
-                PropertyInfo[] pinfo = instance.GetType().GetProperties();
-
-                for (int i = 0; i < pinfo.Count(); i++)
+                PropertyInfo Property = pinfo[i];
+                for (int j = 0; j < row.Table.Columns.Count; j++)
                 {
-                    PropertyInfo Property = pinfo[i];
-                    for (int j = 0; j < row.Table.Columns.Count; j++)
+                    DataColumn Column = row.Table.Columns[j];
+                    if (Property.Name.ToLower() == Column.ColumnName.ToLower() && Property.PropertyType.Equals(Column.DataType))
                     {
-                        DataColumn Column = row.Table.Columns[j];
-
-                        if (Property.Name.Equals(Column.ColumnName, StringComparison.OrdinalIgnoreCase) && Property.PropertyType.Equals(Column.DataType))
-                        {
-                            object value = row[Column.ColumnName].Equals(DBNull.Value) ? null : row[Column.ColumnName];
-                            instance.GetType().GetProperty(Property.Name).SetValue(instance, value);
-                        }
+                        object value = row[Column.ColumnName].Equals(DBNull.Value) ? null : row[Column.ColumnName];
+                        instance.GetType().GetProperty(Property.Name).SetValue(instance, value, null);
                     }
-
                 }
-                return instance;
             }
+
+            return instance;
         }
         public static IEnumerable<T> PopulateModels<T>(DataTable table)
         {
-            return table.AsEnumerable().Select(row =>
+            List<T> models = new List<T>();
+            foreach (DataRow row in table.Rows)
             {
-                return Populate<T>(row);
-            });
+                models.Add(Populate<T>(row));
+            }
+            return models;
         }
         public static IEnumerable<dynamic> PopulateModels(DataTable table)
         {
-            return table.AsEnumerable().Select(row =>
+            List<dynamic> models = new List<dynamic>();
+            foreach (DataRow row in table.Rows)
             {
-                return new DBObject(row);
-            });
+                models.Add(new DBObject(row));
+            }
+            return models;
         }
 
         public void Dispose()
