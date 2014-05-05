@@ -1,7 +1,7 @@
 DBit
 ====
 
-A lightweight micro-ORM with performance and ease-of-use in mind
+A lightweight database API with performance and ease-of-use in mind
 
 
 Execute Querys
